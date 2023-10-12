@@ -1,8 +1,9 @@
-import { useGetUsersQuery } from "../redux/features/users/usersApiSlice"
-import { Link } from 'react-router-dom'
+import { useGetUsersQuery } from "../../redux/features/users/usersApiSlice"
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 const Users = () => {
+    const navigate = useNavigate();
     const {
         data,
         isFetching,
@@ -39,12 +40,18 @@ const Users = () => {
         },
     ]
 
+    const handleDeleteClick = (e, id) => {
+        console.log(id)
+    }
+
     return (
         <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
                 <Link to="/">Go to Home</Link>
                 <h1>Users</h1>
-                <div></div>
+                <div style={{ padding: "5px" }} >
+                    <Button variant="contained" size="large">Add</Button>
+                </div>
             </div>
             <hr />
             <div>
@@ -125,24 +132,15 @@ const Users = () => {
                                                                 </TableCell>
                                                                 <TableCell align="center">
                                                                     <div style={{ display: "flex", justifyContent: "space-between" }} >
-                                                                        <Button variant="contained" color="success"
-                                                                        // onClick={(event) =>
-                                                                        //   handleViewClick(event, row._id)
-                                                                        // }
-                                                                        >
-                                                                            View
-                                                                        </Button>
                                                                         <Button variant="contained" color="secondary"
-                                                                        // onClick={(event) =>
-                                                                        //   handleEditClick(event, row._id)
-                                                                        // }
+                                                                            onClick={() => navigate(`/users/${row._id}`)}
                                                                         >
                                                                             Edit
                                                                         </Button>
                                                                         <Button variant="contained" color="error"
-                                                                        // onClick={(event) =>
-                                                                        //   handleDeleteClick(event, row._id)
-                                                                        // }
+                                                                            onClick={(event) =>
+                                                                                handleDeleteClick(event, row._id)
+                                                                            }
                                                                         >Delete</Button>
                                                                     </div>
                                                                 </TableCell>

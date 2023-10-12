@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
-import Users from './components/Users'
+import Users from './components/users/Users'
 import PersistLogin from './components/PersistLogin'
 import AdminPage from './components/AdminPage'
 import ManagerPage from './components/ManagerPage'
@@ -10,6 +10,7 @@ import { ROLES } from './config/roles'
 import RequireAuth from './components/RequireAuth'
 import Unauthorized from './components/Unauthorized'
 import Missing from './components/Missing'
+import EditUser from './components/users/EditUser'
 
 const App = () => {
   return (
@@ -19,8 +20,9 @@ const App = () => {
 
       <Route element={<PersistLogin />}>
         <Route path="/" element={<Home />} />
-        <Route element={<RequireAuth allowedRoles={[ROLES.Employee]} />}>
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<EditUser />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
