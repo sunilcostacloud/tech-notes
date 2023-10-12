@@ -2,6 +2,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSendLogoutMutation } from '../redux/features/auth/authApiSlice';
 import { useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
+import { Button } from "@mui/material";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -23,12 +24,14 @@ const Home = () => {
             <h1>Home</h1>
             <button onClick={sendLogout} disabled={isLoading}>{isLoading ? "Logging Out..." : "Logout"}</button>
             <div><Link to="/login">Login</Link></div>
-            <div><Link to="/users">Users</Link></div>
             <div><Link to="/admin-page">admin</Link></div>
             <div><Link to="/manager-page">manager</Link></div>
             <div><Link to="/user-page">userPage</Link></div>
             <hr />
             <p>Current User: {username}</p>
+            <Button onClick={() => navigate('/users')} color='primary' variant='contained' >
+                Users Crud
+            </Button>
             <hr />
             {isError && <p>Error: {error.data?.message}</p>}
             <hr />
